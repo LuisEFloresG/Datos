@@ -3,77 +3,109 @@ import matplotlib.pyplot as pit
 
 df = pd.read_csv("./ElementosBasicosde/housing.csv")
 
-print(df.head())
+data = {
+"Celda": [
+        "Longitude", "Latitude", "Housing Median Age", "Total Rooms",
+        "Total Bedrooms", "Population", "Households", "Median Income", "Median House Value"
+    ],
+    "Media": [
+        df["longitude"].mean(),
+        df["latitude"].mean(),
+        df["housing_median_age"].mean(),
+        df["total_rooms"].mean(),
+        df["total_bedrooms"].mean(),
+        df["population"].mean(),
+        df["households"].mean(),
+        df["median_income"].mean(),
+        df["median_house_value"].mean()
+    ],
+   
+}
 
-longitude = df["longitude"].mean()
-print('La media del total longitud es: ')
-print(longitude)
+df_media = pd.DataFrame(data)
+print(df_media)
 
-latitude = df['latitude'].mean()
-print('La media del total latitud es: ')
-print(latitude)
+data = {
+    "Celda": [
+        "Longitude", "Latitude", "Housing Median Age", "Total Rooms",
+        "Total Bedrooms", "Population", "Households", "Median Income", "Median House Value" ],
+ "Mediana": [
+        df["longitude"].median(),
+        df["latitude"].median(),
+        df["housing_median_age"].median(),
+        df["total_rooms"].median(),
+        df["total_bedrooms"].median(),
+        df["population"].median(),
+        df["households"].median(),
+        df["median_income"].median(),
+        df["median_house_value"].median()
+    ],
+}
 
-housing = df['housing_median_age'].mean()
-print('La media del total housing es: ')
-print(housing)
+df_mediana = pd.DataFrame(data)
+print(df_mediana)
 
-mediadecuarto = df["total_rooms"].mean()
-print("La media del total room es: ")
-print(mediadecuarto)
+data = {
+    "Celda": [
+        "Longitude", "Latitude", "Housing Median Age", "Total Rooms",
+        "Total Bedrooms", "Population", "Households", "Median Income", "Median House Value" ],
+ "Moda": [
+        df["longitude"].mode(),
+        df["latitude"].mode(),
+        df["housing_median_age"].mode(),
+        df["total_rooms"].mode(),
+        df["total_bedrooms"].mode(),
+        df["population"].mode(),
+        df["households"].mode(),
+        df["median_income"].mode(),
+        df["median_house_value"].mode()
+    ],
+}
+df_moda = pd.DataFrame(data)
+print(df_moda)
 
-mediadecuarto2 = df["total_bedrooms"].mean()
-print("La media del total bedroom es: ")
-print(mediadecuarto2)
+columnas = [
+    "longitude", "latitude", "housing_median_age", "total_rooms",
+    "total_bedrooms", "population", "households", "median_income", "median_house_value"]
 
-poblacion = df["population"].mean()
-print("La media del total population es: ")
-print(poblacion)
+data = {
+    "Celda": columnas,
+    "Rango": [df[col].max() - df[col].min() for col in columnas]
+}
 
-households = df["households"].mean()
-print('La media del total households es: ')
-print(households)
+df_rango_moda = pd.DataFrame(data)
+print(df_rango_moda)
 
-income = df['median_income'].mean()
-print('La media de income es: ')
-print(income)
+data = {
+    "Celda": columnas,
+    "Varianza": [df[col].var() for col in columnas]
+}
 
-value = df['median_house_value'].mean()
-print('La media de value es: ')
-print(value)
+df_varianza = pd.DataFrame(data)
+print(df_varianza)
 
-longitud = df["longitude"].median()
-print("La mediana de la columna longitud de la casa es: ")
-print(longitud)
+data = {
+    "Celda": columnas,
+    "Desviacion Estandar": [df[col].std() for col in columnas]
+}
 
-latitud = df['latitude'].median()
-print('La mediana de la columna latitud de la casa es: ')
-print(latitud)
+df_desviacion_estandar = pd.DataFrame(data)
+print(df_desviacion_estandar)
 
-housing = df['housing_median_age'].median()
-print('La mediana de la columna housing es: ')
-print(housing)
 
-mediadecuarto = df["total_rooms"].median()
-print("La mediana de la columna room es: ")
-print(mediadecuarto)
+promedio_precio = df["median_house_value"].mean()
 
-mediadecuarto2 = df["total_bedrooms"].median()
-print("La media de la columna bedroom es: ")
-print(mediadecuarto2)
 
-poblacion = df["population"].median()
-print("La mediana de la columna population es: ")
-print(poblacion)
+diferencias = df["median_house_value"] - promedio_precio
 
-households = df["households"].median()
-print('La mediana de la columna households es: ')
-print(households)
+pit.scatter(df["total_bedrooms"], diferencias)
+pit.xlabel("Numero de habitaciones")
+pit.ylabel("promedio de casas")
+pit.title("Grafico de Dispersión de Numero de Habitaciones vs Promedio de casas")
+pit.show()
 
-income = df['median_income'].median()
-print('La mediana de la columna income es: ')
-print(income)
-
-value = df['median_house_value'].median()
-print('La mediana de la columna value es: ')
-print(value)
-
+pit.scatter(df["population"], diferencias)
+pit.xlabel("Numero de habitantes")
+pit.ylabel("promedio de casas")
+pit.title("Grafico de Dispersión de Numero de Habitantes vs Promedio de casas")
+pit.show()
